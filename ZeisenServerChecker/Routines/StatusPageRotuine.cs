@@ -66,7 +66,7 @@ namespace ZeisenProjectServerChecker.Routines
 							if (statusResult == 1)
 								setter.SetCustomValue(table, index, StringTable.StatusOnline);
 							else
-								setter.SetCustomValue(table, index, StringTable.StatusOffline);
+								setter.SetCustomValue(table, index, StringTable.LoadingFailure);
 
 							break;
 						}
