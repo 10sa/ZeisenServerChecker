@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ZeisenProjectServerChecker.Interfaces;
-using ZeisenProjectServerChecker.Models;
-using ZeisenProjectServerChecker;
+using ZeisenServerChecker.Interfaces;
+using ZeisenServerChecker.Models;
+using ZeisenServerChecker;
 using System.Net;
 
-namespace ZeisenProjectServerChecker.Routines
+namespace ZeisenServerChecker.Routines
 {
 	class StatusPageRotuine : RoutineAbstract
 	{

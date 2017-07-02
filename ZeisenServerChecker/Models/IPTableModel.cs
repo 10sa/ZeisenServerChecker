@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using ZeisenProjectServerChecker.Enums;
+using ZeisenServerChecker.Enums;
 
-namespace ZeisenProjectServerChecker.Models
+namespace ZeisenServerChecker.Models
 {
 	public class IPTableModel
 	{

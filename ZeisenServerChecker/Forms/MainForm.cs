@@ -12,11 +12,11 @@ using System.Net.Sockets;
 using System.Net;
 using System.Net.NetworkInformation;
 
-using ZeisenProjectServerChecker.Models;
-using ZeisenProjectServerChecker.Routines;
-using ZeisenProjectServerChecker.Interfaces;
+using ZeisenServerChecker.Models;
+using ZeisenServerChecker.Routines;
+using ZeisenServerChecker.Interfaces;
 
-namespace ZeisenProjectServerChecker
+namespace ZeisenServerChecker
 {
 	public partial class MainForm : Form, StatusSetter
 	{

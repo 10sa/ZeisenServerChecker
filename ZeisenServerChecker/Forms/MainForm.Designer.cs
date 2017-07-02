@@ -1,4 +1,4 @@
-﻿namespace ZeisenProjectServerChecker
+﻿namespace ZeisenServerChecker
 {
 	partial class MainForm
 	{

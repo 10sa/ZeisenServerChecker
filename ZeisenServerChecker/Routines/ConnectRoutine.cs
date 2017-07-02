@@ -7,10 +7,10 @@ using System.Threading;
 using System.Net.Sockets;
 using System.Net;
 
-using ZeisenProjectServerChecker.Interfaces;
-using ZeisenProjectServerChecker.Models;
+using ZeisenServerChecker.Interfaces;
+using ZeisenServerChecker.Models;
 
-namespace ZeisenProjectServerChecker.Routines
+namespace ZeisenServerChecker.Routines
 {
 	class ConnectRoutine : RoutineAbstract
 	{

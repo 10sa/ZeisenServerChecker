@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 
-namespace ZeisenProjectServerChecker
+namespace ZeisenServerChecker
 {
 	static class Program
 	{

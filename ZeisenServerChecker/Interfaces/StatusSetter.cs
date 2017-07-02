@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using ZeisenProjectServerChecker.Models;
+using ZeisenServerChecker.Models;
 
-namespace ZeisenProjectServerChecker.Interfaces
+namespace ZeisenServerChecker.Interfaces
 {
 	interface StatusSetter
 	{

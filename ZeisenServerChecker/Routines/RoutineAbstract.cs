@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using ZeisenProjectServerChecker.Models;
-using ZeisenProjectServerChecker.Interfaces;
+using ZeisenServerChecker.Models;
+using ZeisenServerChecker.Interfaces;
 
-namespace ZeisenProjectServerChecker.Routines
+namespace ZeisenServerChecker.Routines
 {
 	abstract class RoutineAbstract
 	{

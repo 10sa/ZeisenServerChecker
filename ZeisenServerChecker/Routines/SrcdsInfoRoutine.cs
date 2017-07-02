@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
-using ZeisenProjectServerChecker.Models;
-using ZeisenProjectServerChecker.Interfaces;
+using ZeisenServerChecker.Models;
+using ZeisenServerChecker.Interfaces;
 using System.Net;
 using System.Net.Sockets;
 
-namespace ZeisenProjectServerChecker.Routines
+namespace ZeisenServerChecker.Routines
 {
 	class SrcdsInfoRoutine : RoutineAbstract
 	{

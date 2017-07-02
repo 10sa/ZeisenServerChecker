@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{B1AD2C54-F6AE-4F2F-9957-C439FEFE1E31}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>ZeisenProjectServerChecker</RootNamespace>
-    <AssemblyName>ZeisenProjectServerChecker</AssemblyName>
+    <RootNamespace>ZeisenServerChecker</RootNamespace>
+    <AssemblyName>ZeisenServerChecker</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -92,6 +92,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
