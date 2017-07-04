@@ -15,7 +15,7 @@ namespace ZeisenServerChecker.Routines
 		private Thread worker;
 		private RoutineAbstract routine;
 
-		private const int TimeWait = 30000;
+		private const int TimeWait = 35000;
 
 		private RoutineWorker() { }
 

@@ -107,7 +107,7 @@
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "MainForm";
-			this.Text = "Zeisen Server Status Checker";
+			this.Text = "Zeisen Server Checker";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
 			this.Load += new System.EventHandler(this.MainForm_Load);
 			this.contextMenuStrip1.ResumeLayout(false);

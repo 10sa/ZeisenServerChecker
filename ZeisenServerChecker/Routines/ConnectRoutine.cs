@@ -15,7 +15,7 @@ namespace ZeisenServerChecker.Routines
 	class ConnectRoutine : RoutineAbstract
 	{
 		private Socket httpChecker = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-		private Dictionary<IPTableModel, ManualResetEvent> connectWait = new Dictionary<IPTableModel, ManualResetEvent>();
+		private ManualResetEvent connectControl = new ManualResetEvent(true);
 
 		private IPTableModel[] tables;
 		private StatusSetter setter;
@@ -23,8 +23,8 @@ namespace ZeisenServerChecker.Routines
 
 		public ConnectRoutine()
 		{
-			httpChecker.ReceiveTimeout = 600;
-			httpChecker.SendTimeout = 600;
+			httpChecker.ReceiveTimeout = 300;
+			httpChecker.SendTimeout = 300;
 		}
 
 		public override void Initialize(IPTableModel[] tables, StatusSetter setter, int index)
@@ -40,11 +40,6 @@ namespace ZeisenServerChecker.Routines
 			{
 				if (data.Type == Enums.CheckType.Http)
 				{
-					if (!connectWait.ContainsKey(data))
-						connectWait.Add(data, new ManualResetEvent(true));
-
-					setter.SetChecking(data, index);
-
 					SocketAsyncEventArgs args = new SocketAsyncEventArgs();
 					args.RemoteEndPoint = new IPEndPoint(IPAddress.Parse(data.IPAddress), data.Port);
 					args.Completed += (a, b) =>
@@ -59,14 +54,15 @@ namespace ZeisenServerChecker.Routines
 						else
 							setter.SetOffline(data, index);
 
-						connectWait[data].Set();
+						connectControl.Set();
 					};
 
 					try
 					{
-						connectWait[data].WaitOne();
-						connectWait[data].Reset();
+						connectControl.WaitOne();
+						connectControl.Reset();
 
+						setter.SetChecking(data, index);
 						httpChecker.ConnectAsync(args);
 					}
 					catch (SocketException)
