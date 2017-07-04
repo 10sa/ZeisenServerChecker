@@ -16,6 +16,7 @@ namespace ZeisenServerChecker.Routines
 		private Socket connectChecker = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
 		private byte[] buffer = new byte[2048];
 
+		private string mapCache = string.Empty;
 		private IPTableModel[] tables;
 		private StatusSetter setter;
 		private int index;
@@ -56,8 +57,13 @@ namespace ZeisenServerChecker.Routines
 						if (!response.Visibility)
 						{
 							// Only for Zeisen Project.
-							if (response.Name.Contains("[Z.P ★] Story Mode") && response.Tags.Contains("Zeisen Project ★"))
+							if (response.Name.Contains("[Z.P ★] Story Mode") && response.Tags.Contains("Zeisen Project ★") && !response.Map.Equals(mapCache))
+							{
+								mapCache = response.Map;
 								setter.CustomNotify("Story Notify", string.Format("{0} 서버가 {1} 스토리 맵을 진행 중입니다.", response.Name, response.Map));
+							}
+							else
+								mapCache = string.Empty;
 
 							setter.SetOnline(data, index);
 						}
