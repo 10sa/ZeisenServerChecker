@@ -19,7 +19,8 @@ namespace ZeisenServerChecker.Routines
 		private IPTableModel[] tables;
 		private StatusSetter setter;
 		private int index;
-
+		
+		// A2A_INFO Query.
 		private readonly byte[] enginePingQuery = { 0xFF, 0xFF, 0xFF, 0xFF, 0x54, 0x53, 0x6F, 0x75, 0x72, 0x63, 0x65, 0x20, 0x45, 0x6E, 0x67, 0x69, 0x6E, 0x65, 0x20, 0x51, 0x75, 0x65, 0x72, 0x79, 0x00 };
 
 		public SrcdsInfoRoutine()
@@ -49,7 +50,22 @@ namespace ZeisenServerChecker.Routines
 						EndPoint ep = new IPEndPoint(IPAddress.Parse(data.IPAddress), data.Port);
 						connectChecker.SendTo(enginePingQuery, ep);
 						connectChecker.ReceiveFrom(buffer, ref ep);
-						setter.SetOnline(data, index);
+
+						SrcdsResponsePacket response = SrcdsResponsePacket.Parse(buffer);
+
+						if (!response.Visibility)
+						{
+							// Only for Zeisen Project.
+							if (response.Name.Contains("[Z.P ★] Story Mode") && response.Tags.Contains("Zeisen Project ★"))
+								setter.CustomNotify("Story Notify", string.Format("{0} 서버가 {1} 스토리 맵을 진행 중입니다.", response.Name, response.Map));
+
+							setter.SetOnline(data, index);
+						}
+						else
+						{
+							setter.CustomNotify(StringTable.Locked, data.Name + StringTable.ServerIsLocked);
+							setter.SetCustomValue(data, index, StringTable.Locked);
+						}
 					}
 					catch (SocketException)
 					{

@@ -192,5 +192,10 @@ namespace ZeisenServerChecker
 					notifyTimer.Stop();
 			}
 		}
+
+		public void CustomNotify(string title, string desc)
+		{
+			this.Notify(title, desc);
+		}
 	}
 }

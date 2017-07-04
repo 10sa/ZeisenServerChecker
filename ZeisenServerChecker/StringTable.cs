@@ -16,6 +16,9 @@ namespace ZeisenServerChecker
 		public const string StatusIsOnline = "서버가 온라인입니다.";
 		public const string StatusIsOffline = "서버가 종료되었습니다.";
 		public const string LoadingFailure = "불러오기 실패";
+		public const string Locked = "잠김";
+
+		public const string ServerIsLocked = " 서버가 잠긴 상태입니다.";
 
 		public const string AlreadyRunning = "프로그램이 이미 실행 중입니다.";
 		public const string Warning = "경고";
