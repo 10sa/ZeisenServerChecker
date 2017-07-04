@@ -17,6 +17,7 @@ namespace ZeisenServerChecker.Routines
 		private byte[] buffer = new byte[2048];
 
 		private string mapCache = string.Empty;
+		private Dictionary<IPTableModel, bool> lockDupCtl = new Dictionary<IPTableModel, bool>();
 		private IPTableModel[] tables;
 		private StatusSetter setter;
 		private int index;
@@ -66,11 +67,19 @@ namespace ZeisenServerChecker.Routines
 								mapCache = string.Empty;
 
 							setter.SetOnline(data, index);
+							lockDupCtl[data] = false;
 						}
 						else
 						{
-							setter.CustomNotify(StringTable.Locked, data.Name + StringTable.ServerIsLocked);
-							setter.SetCustomValue(data, index, StringTable.Locked);
+							bool isDupLock = false;
+							lockDupCtl.TryGetValue(data, out isDupLock);
+
+							if (!isDupLock)
+							{
+								lockDupCtl[data] = true;
+								setter.CustomNotify(StringTable.Locked, data.Name + StringTable.ServerIsLocked);
+								setter.SetCustomValue(data, index, StringTable.Locked);
+							}
 						}
 					}
 					catch (SocketException)
