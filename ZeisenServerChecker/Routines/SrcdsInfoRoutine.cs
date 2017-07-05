@@ -73,17 +73,18 @@ namespace ZeisenServerChecker.Routines
 						{
 							bool isDupLock = false;
 							lockDupCtl.TryGetValue(data, out isDupLock);
+							setter.SetCustomValue(data, index, StringTable.Locked);
 
 							if (!isDupLock)
 							{
 								lockDupCtl[data] = true;
 								setter.CustomNotify(StringTable.Locked, data.Name + StringTable.ServerIsLocked);
-								setter.SetCustomValue(data, index, StringTable.Locked);
 							}
 						}
 					}
 					catch (SocketException)
 					{
+						lockDupCtl[data] = false;
 						setter.SetOffline(data, index);
 					}
 				}
