@@ -67,6 +67,7 @@ namespace ZeisenServerChecker.Routines
 								mapCache = string.Empty;
 
 							setter.SetOnline(data, index);
+
 							lockDupCtl[data] = false;
 						}
 						else
@@ -81,11 +82,25 @@ namespace ZeisenServerChecker.Routines
 								setter.CustomNotify(StringTable.Locked, data.Name + StringTable.ServerIsLocked);
 							}
 						}
+
+						if (setter.IsExtend())
+						{
+							setter.SetCustomValue(data, 4, string.Format("{0}/{1}", response.Players, response.MaxPlayers));
+							setter.SetCustomValue(data, 5, response.Map);
+							setter.SetCustomValue(data, 6, response.Visibility ? StringTable.Locked : StringTable.Opened);
+							setter.SetCustomValue(data, 7, response.Name);
+						}
 					}
 					catch (SocketException)
 					{
 						lockDupCtl[data] = false;
 						setter.SetOffline(data, index);
+
+						if (setter.IsExtend())
+						{
+							for (int i = 4; i < 8; i++)
+								setter.SetCustomValue(data, i, StringTable.StatusOffline);
+						}
 					}
 				}
 			}

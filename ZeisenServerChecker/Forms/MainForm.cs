@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using System.Net.Sockets;
 using System.Net;
 using System.Net.NetworkInformation;
+using Microsoft.Win32;
 
 using ZeisenServerChecker.Models;
 using ZeisenServerChecker.Routines;
@@ -28,6 +29,8 @@ namespace ZeisenServerChecker
 		private List<RoutineWorker> workers = new List<RoutineWorker>();
 		private ManualResetEvent notifyWait = new ManualResetEvent(true);
 		private System.Timers.Timer notifyTimer = new System.Timers.Timer();
+		private RegistryKey programRegistry;
+		private bool isExtened = false;
 
 		public MainForm()
 		{
@@ -45,6 +48,9 @@ namespace ZeisenServerChecker
 			this.WindowState = FormWindowState.Minimized;
 			this.ShowInTaskbar = false;
 
+			if ((programRegistry = Registry.CurrentUser.OpenSubKey(StringTable.Config_SubKeyName, true)) == null)
+				programRegistry = Registry.CurrentUser.CreateSubKey(StringTable.Config_SubKeyName);
+
 			notifyTimer.Interval = NotifyTime;
 			notifyTimer.AutoReset = false;
 			notifyTimer.Elapsed += (a, b) =>
@@ -58,6 +64,10 @@ namespace ZeisenServerChecker
 			RegisterWorker(new SrcdsInfoRoutine(), MainStatusItemIndex);
 			RegisterWorker(new ConnectRoutine(), MainStatusItemIndex);
 			RegisterWorker(new StatusPageRotuine(), SubStatusItemIndex);
+
+			bool cacheExtened = bool.Parse((string)programRegistry.GetValue(StringTable.Config_Key, false));
+			if (Convert.ToBoolean(cacheExtened))
+				SetExtendMode();
 		}
 
 		private void RegisterWorker(RoutineAbstract routine, int index)
@@ -80,7 +90,7 @@ namespace ZeisenServerChecker
 				value.IsOnline = null;
 			}
 
-			listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+			AutoResizeEx();
 		}
 
 		public void SetOnline(IPTableModel table, int index, bool isNotify = true)
@@ -101,6 +111,8 @@ namespace ZeisenServerChecker
 				Invoke((MethodInvoker)delegate
 				{
 					listView1.Items[table.FormsIndex].SubItems[index].Text = StringTable.StatusOnline;
+
+					AutoResizeEx();
 				});
 			}
 		}
@@ -123,6 +135,8 @@ namespace ZeisenServerChecker
 				Invoke((MethodInvoker)delegate
 				{
 					listView1.Items[table.FormsIndex].SubItems[index].Text = StringTable.StatusOffline;
+
+					AutoResizeEx();
 				});
 			}
 		}
@@ -133,6 +147,8 @@ namespace ZeisenServerChecker
 			Invoke((MethodInvoker)delegate
 			{
 				listView1.Items[table.FormsIndex].SubItems[index].Text = StringTable.StatusChecking;
+
+				AutoResizeEx();
 			});
 		}
 
@@ -141,7 +157,14 @@ namespace ZeisenServerChecker
 			Invoke((MethodInvoker)delegate
 			{
 				listView1.Items[table.FormsIndex].SubItems[index].Text = value;
+
+				AutoResizeEx();
 			});
+		}
+
+		private void AutoResizeEx()
+		{
+			listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
 		}
 
 		private void Notify(string tipTitle, string tipText)
@@ -196,6 +219,76 @@ namespace ZeisenServerChecker
 		public void CustomNotify(string title, string desc)
 		{
 			this.Notify(title, desc);
+		}
+
+		private readonly string[] extendColumns = {
+			"유저 수", // Index 4
+			"맵", // 5
+			"잠김 여부", // 6
+			"서버 이름" // 7
+		};
+
+		private void ExtendModeToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			if (isExtened)
+			{
+				this.Size = new Size(600, 600);
+				RemoveExtendMode();
+			}
+			else
+			{
+				SetExtendMode();
+
+				foreach (var data in workers)
+					data.ForceStartCycle();
+			}
+
+			AutoResizeEx();
+		}
+
+		private void RemoveExtendMode()
+		{
+			((ToolStripMenuItem)menuStrip1.Items[0]).Checked = false;
+
+			foreach (ColumnHeader data in listView1.Columns)
+			{
+				foreach (var key in extendColumns)
+				{
+					if (data.Text == key)
+						listView1.Columns.Remove(data);
+				}
+			}
+
+			programRegistry.SetValue(StringTable.Config_Key, false);
+			isExtened = false;
+		}
+
+		private void SetExtendMode()
+		{
+			this.Size = new Size(1000, 600);
+
+			((ToolStripMenuItem)menuStrip1.Items[0]).Checked = true;
+			foreach (var data in extendColumns)
+				listView1.Columns.Add(data);
+			
+			foreach (var data in IPTable)
+			{
+				for (int i = 0; i < 4; i++)
+				{
+					if (data.Type != Enums.CheckType.SocketConnect)
+						listView1.Items[data.FormsIndex].SubItems.Add(StringTable.NotSupprot);
+					else
+						listView1.Items[data.FormsIndex].SubItems.Add(StringTable.WaitCycle);
+				}
+			}
+
+			isExtened = true;
+			programRegistry.SetValue(StringTable.Config_Key, true);
+		}
+
+		public bool IsExtend()
+		{
+			return isExtened;
 		}
 	}
 }

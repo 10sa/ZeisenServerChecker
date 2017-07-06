@@ -38,26 +38,34 @@
 			this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
 			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.종료하기ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+			this.SettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.ExtendModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.시작프로그램설정ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.contextMenuStrip1.SuspendLayout();
+			this.menuStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// listView1
 			// 
+			this.listView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2,
             this.columnHeader3,
             this.columnHeader4});
-			this.listView1.Location = new System.Drawing.Point(12, 12);
+			this.listView1.Location = new System.Drawing.Point(12, 27);
 			this.listView1.Name = "listView1";
-			this.listView1.Size = new System.Drawing.Size(560, 537);
+			this.listView1.Size = new System.Drawing.Size(560, 522);
 			this.listView1.TabIndex = 0;
 			this.listView1.UseCompatibleStateImageBehavior = false;
 			this.listView1.View = System.Windows.Forms.View.Details;
 			// 
 			// columnHeader1
 			// 
-			this.columnHeader1.Text = "서버 이름";
+			this.columnHeader1.Text = "등록된 서버 이름";
 			this.columnHeader1.Width = 69;
 			// 
 			// columnHeader2
@@ -67,12 +75,12 @@
 			// 
 			// columnHeader3
 			// 
-			this.columnHeader3.Text = "서버 상태";
+			this.columnHeader3.Text = "상태";
 			this.columnHeader3.Width = 77;
 			// 
 			// columnHeader4
 			// 
-			this.columnHeader4.Text = "공인 서버 상태";
+			this.columnHeader4.Text = "상태 2";
 			// 
 			// notifyIcon1
 			// 
@@ -97,21 +105,64 @@
 			this.종료하기ToolStripMenuItem.Text = "종료하기";
 			this.종료하기ToolStripMenuItem.Click += new System.EventHandler(this.종료하기ToolStripMenuItem_Click);
 			// 
+			// menuStrip1
+			// 
+			this.menuStrip1.BackColor = System.Drawing.Color.White;
+			this.menuStrip1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.SettingsToolStripMenuItem});
+			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+			this.menuStrip1.Name = "menuStrip1";
+			this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+			this.menuStrip1.Size = new System.Drawing.Size(584, 24);
+			this.menuStrip1.TabIndex = 1;
+			this.menuStrip1.Text = "menuStrip1";
+			// 
+			// SettingsToolStripMenuItem
+			// 
+			this.SettingsToolStripMenuItem.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+			this.SettingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ExtendModeToolStripMenuItem,
+            this.시작프로그램설정ToolStripMenuItem});
+			this.SettingsToolStripMenuItem.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+			this.SettingsToolStripMenuItem.Name = "SettingsToolStripMenuItem";
+			this.SettingsToolStripMenuItem.Size = new System.Drawing.Size(98, 20);
+			this.SettingsToolStripMenuItem.Text = "설정 (Settings)";
+			// 
+			// ExtendModeToolStripMenuItem
+			// 
+			this.ExtendModeToolStripMenuItem.Name = "ExtendModeToolStripMenuItem";
+			this.ExtendModeToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+			this.ExtendModeToolStripMenuItem.Text = "확장 모드";
+			this.ExtendModeToolStripMenuItem.Click += new System.EventHandler(this.ExtendModeToolStripMenuItem_Click);
+			// 
+			// 시작프로그램설정ToolStripMenuItem
+			// 
+			this.시작프로그램설정ToolStripMenuItem.Name = "시작프로그램설정ToolStripMenuItem";
+			this.시작프로그램설정ToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+			this.시작프로그램설정ToolStripMenuItem.Text = "시작 프로그램 설정";
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.White;
 			this.ClientSize = new System.Drawing.Size(584, 561);
+			this.Controls.Add(this.menuStrip1);
 			this.Controls.Add(this.listView1);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+			this.MainMenuStrip = this.menuStrip1;
+			this.MaximizeBox = false;
 			this.Name = "MainForm";
 			this.Text = "Zeisen Server Checker";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
 			this.Load += new System.EventHandler(this.MainForm_Load);
 			this.contextMenuStrip1.ResumeLayout(false);
+			this.menuStrip1.ResumeLayout(false);
+			this.menuStrip1.PerformLayout();
 			this.ResumeLayout(false);
+			this.PerformLayout();
 
 		}
 
@@ -125,6 +176,10 @@
 		private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
 		private System.Windows.Forms.ToolStripMenuItem 종료하기ToolStripMenuItem;
 		private System.Windows.Forms.ColumnHeader columnHeader4;
+		private System.Windows.Forms.MenuStrip menuStrip1;
+		private System.Windows.Forms.ToolStripMenuItem SettingsToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem ExtendModeToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem 시작프로그램설정ToolStripMenuItem;
 	}
 }
 

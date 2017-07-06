@@ -14,6 +14,8 @@ namespace ZeisenServerChecker.Routines
 	{
 		private Thread worker;
 		private RoutineAbstract routine;
+		private ManualResetEvent workerWaitControl = new ManualResetEvent(true);
+		private System.Timers.Timer timeWaitController;
 
 		private const int TimeWait = 35000;
 
@@ -22,8 +24,20 @@ namespace ZeisenServerChecker.Routines
 		public RoutineWorker(RoutineAbstract routine, StatusSetter setter, IPTableModel[] tables, int index)
 		{
 			worker = new Thread(ThreadRoutine);
+			timeWaitController = new System.Timers.Timer(TimeWait);
+			timeWaitController.AutoReset = true;
+			timeWaitController.Elapsed += (a, b) =>
+			{
+				workerWaitControl.Set();
+			};
+
 			this.routine = routine;
 			worker.Start(new RoutineArgs(routine, setter, tables, index));
+		}
+
+		public void ForceStartCycle()
+		{
+				workerWaitControl.Set();
 		}
 
 		public void Stop()
@@ -40,8 +54,9 @@ namespace ZeisenServerChecker.Routines
 			{
 				try
 				{
+					workerWaitControl.WaitOne();
+					workerWaitControl.Reset();
 					routineArg.Routine.Work();
-					Thread.Sleep(TimeWait);
 				}
 				catch (ThreadAbortException)
 				{
