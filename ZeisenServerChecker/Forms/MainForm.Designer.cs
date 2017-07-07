@@ -141,6 +141,7 @@
 			this.시작프로그램설정ToolStripMenuItem.Name = "시작프로그램설정ToolStripMenuItem";
 			this.시작프로그램설정ToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
 			this.시작프로그램설정ToolStripMenuItem.Text = "시작 프로그램 설정";
+			this.시작프로그램설정ToolStripMenuItem.Click += new System.EventHandler(this.시작프로그램설정ToolStripMenuItem_Click);
 			// 
 			// MainForm
 			// 

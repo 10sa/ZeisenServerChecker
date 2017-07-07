@@ -290,5 +290,17 @@ namespace ZeisenServerChecker
 		{
 			return isExtened;
 		}
+
+		private void 시작프로그램설정ToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			RegistryKey startKey;
+
+			if ((startKey = Registry.CurrentUser.OpenSubKey(StringTable.StartMenuRegPath, true)) != null)
+			{
+				startKey.SetValue(StringTable.ProgramKey, Application.ExecutablePath);
+				MessageBox.Show(StringTable.StartMenuCreateComplatedTitle, StringTable.StartMenuCreateCompleted);
+
+			}
+		}
 	}
 }

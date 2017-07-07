@@ -27,5 +27,11 @@ namespace ZeisenServerChecker
 
 		public const string Config_SubKeyName = "USER_ZSC_CONFIG";
 		public const string Config_Key = "Extened";
+
+		public const string StartMenuRegPath = @"Software\Microsoft\Windows\CurrentVersion\Run";
+		public const string ProgramKey = "ZSC";
+
+		public const string StartMenuCreateComplatedTitle = "등록 성공";
+		public const string StartMenuCreateCompleted = "시작 프로그램에 등록을 완료하였습니다.";
 	}
 }
