@@ -32,6 +32,6 @@ namespace ZeisenServerChecker
 		public const string ProgramKey = "ZSC";
 
 		public const string StartMenuCreateComplatedTitle = "등록 성공";
-		public const string StartMenuCreateCompleted = "시작 프로그램에 등록을 완료하였습니다.";
+		public const string StartMenuCreateCompleted = "성공적으로 등록 하였습니다.";
 	}
 }

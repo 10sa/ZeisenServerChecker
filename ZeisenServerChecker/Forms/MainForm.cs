@@ -295,8 +295,8 @@ namespace ZeisenServerChecker
 
 			if ((startKey = Registry.CurrentUser.OpenSubKey(StringTable.StartMenuRegPath, true)) != null)
 			{
-				startKey.SetValue(StringTable.ProgramKey, Application.ExecutablePath);
-				MessageBox.Show(StringTable.StartMenuCreateComplatedTitle, StringTable.StartMenuCreateCompleted);
+				startKey.SetValue(StringTable.ProgramKey, string.Format("\"{0}\"", Application.ExecutablePath));
+				MessageBox.Show(StringTable.StartMenuCreateCompleted, StringTable.StartMenuCreateComplatedTitle, MessageBoxButtons.OK);
 
 			}
 		}
