@@ -65,7 +65,7 @@ namespace ZeisenServerChecker
 			RegisterWorker(new ConnectRoutine(), MainStatusItemIndex);
 			RegisterWorker(new StatusPageRotuine(), SubStatusItemIndex);
 
-			bool cacheExtened = bool.Parse((string)programRegistry.GetValue(StringTable.Config_Key, false));
+			bool cacheExtened = bool.Parse((string)programRegistry.GetValue(StringTable.Config_Key, bool.FalseString));
 			if (Convert.ToBoolean(cacheExtened))
 				SetExtendMode();
 		}
@@ -231,10 +231,7 @@ namespace ZeisenServerChecker
 		private void ExtendModeToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			if (isExtened)
-			{
-				this.Size = new Size(600, 600);
 				RemoveExtendMode();
-			}
 			else
 			{
 				SetExtendMode();
@@ -248,7 +245,8 @@ namespace ZeisenServerChecker
 
 		private void RemoveExtendMode()
 		{
-			((ToolStripMenuItem)menuStrip1.Items[0]).Checked = false;
+			this.Size = new Size(600, 600);
+			ExtendModeToolStripMenuItem.Checked = false;
 
 			foreach (ColumnHeader data in listView1.Columns)
 			{
@@ -266,8 +264,8 @@ namespace ZeisenServerChecker
 		private void SetExtendMode()
 		{
 			this.Size = new Size(1000, 600);
+			ExtendModeToolStripMenuItem.Checked = true;
 
-			((ToolStripMenuItem)menuStrip1.Items[0]).Checked = true;
 			foreach (var data in extendColumns)
 				listView1.Columns.Add(data);
 			
