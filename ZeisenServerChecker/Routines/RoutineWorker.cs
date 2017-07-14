@@ -33,6 +33,7 @@ namespace ZeisenServerChecker.Routines
 
 			this.routine = routine;
 			worker.Start(new RoutineArgs(routine, setter, tables, index));
+			timeWaitController.Start();
 		}
 
 		public void ForceStartCycle()
