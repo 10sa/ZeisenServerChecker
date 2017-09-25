@@ -16,6 +16,7 @@ using Microsoft.Win32;
 using ZeisenServerChecker.Models;
 using ZeisenServerChecker.Routines;
 using ZeisenServerChecker.Interfaces;
+using ZeisenServerChecker.Controllers;
 
 namespace ZeisenServerChecker
 {
@@ -25,8 +26,7 @@ namespace ZeisenServerChecker
 		private const int MainStatusItemIndex = 2;
 		private const int SubStatusItemIndex = 3;
 
-		private readonly List<IPTableModel> IPTable = new List<IPTableModel>();
-		private List<RoutineWorker> workers = new List<RoutineWorker>();
+		private WorkerController workerController;
 		private ManualResetEvent notifyWait = new ManualResetEvent(true);
 		private System.Timers.Timer notifyTimer = new System.Timers.Timer();
 		private RegistryKey programRegistry;
@@ -36,11 +36,7 @@ namespace ZeisenServerChecker
 		{
 			InitializeComponent();
 
-			IPTable.Add(new IPTableModel("Zeisen Project ★ 1 서버", "115.143.203.41", 27025, Enums.CheckType.SocketConnect));
-			IPTable.Add(new IPTableModel("Zeisen Project ★ 2 서버", "115.143.203.41", 27026, Enums.CheckType.SocketConnect));
-			IPTable.Add(new IPTableModel("황혼주점 서버", "115.143.203.41", 27021, Enums.CheckType.SocketConnect));
-			IPTable.Add(new IPTableModel("서버 정보 페이지", "115.143.203.41", 12345, Enums.CheckType.Http));
-			IPTable.Add(new IPTableModel("서버 웹 쉐어", "115.143.203.41", 44444, Enums.CheckType.Http));
+			workerController = new WorkerController();
 
 			InitListView();
 			this.Visible = false;
@@ -60,25 +56,18 @@ namespace ZeisenServerChecker
 
 		private void MainForm_Load(object sender, EventArgs e)
 		{
-			RegisterWorker(new SrcdsInfoRoutine(), MainStatusItemIndex);
-			RegisterWorker(new ConnectRoutine(), MainStatusItemIndex);
-			RegisterWorker(new StatusPageRotuine(), SubStatusItemIndex);
+			workerController.Run(MainStatusItemIndex, SubStatusItemIndex, this);
 
 			bool cacheExtened = bool.Parse((string)programRegistry.GetValue(StringTable.Config_Key, bool.FalseString));
 			if (Convert.ToBoolean(cacheExtened))
 				SetExtendMode();
 		}
 
-		private void RegisterWorker(RoutineAbstract routine, int index)
-		{
-			workers.Add(new RoutineWorker(routine, this, IPTable.ToArray(), index));
-		}
-
 		private void InitListView()
 		{
-			for (int i = 0; i < IPTable.Count; i++)
+			for (int i = 0; i < workerController.IPTable.Count; i++)
 			{
-				IPTableModel value = IPTable[i];
+				IPTableModel value = workerController.IPTable[i];
 				ListViewItem item = new ListViewItem(value.Name);
 				item.SubItems.Add(value.IPAddress);
 				item.SubItems.Add(StringTable.StatusChecking);
@@ -190,10 +179,7 @@ namespace ZeisenServerChecker
 
 		private void 종료하기ToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			foreach (var worker in workers)
-			{
-				worker.Stop();
-			}
+			workerController.Dispose();
 
 			Application.Exit();
 		}
@@ -221,7 +207,7 @@ namespace ZeisenServerChecker
 		}
 
 		private readonly string[] extendColumns = {
-			"유저 수", // Index 4
+			"유저 수", // 4
 			"맵", // 5
 			"잠김 여부", // 6
 			"서버 이름" // 7
@@ -234,9 +220,7 @@ namespace ZeisenServerChecker
 			else
 			{
 				SetExtendMode();
-
-				foreach (var data in workers)
-					data.ForceStartCycle();
+				workerController.Refresh();
 			}
 
 			AutoResizeEx();
@@ -268,7 +252,7 @@ namespace ZeisenServerChecker
 			foreach (var data in extendColumns)
 				listView1.Columns.Add(data);
 			
-			foreach (var data in IPTable)
+			foreach (var data in workerController.IPTable)
 			{
 				for (int i = 0; i < 4; i++)
 				{
