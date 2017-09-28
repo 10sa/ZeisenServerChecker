@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Threading;
+﻿using System.Threading;
 
 using ZeisenServerChecker.Interfaces;
 using ZeisenServerChecker.Models;
@@ -13,7 +8,7 @@ namespace ZeisenServerChecker.Routines
 	class RoutineWorker
 	{
 		private Thread worker;
-		private RoutineAbstract routine;
+		private AbstractRoutineTemplate routine;
 		private ManualResetEvent workerWaitControl = new ManualResetEvent(true);
 		private System.Timers.Timer timeWaitController;
 
@@ -21,7 +16,7 @@ namespace ZeisenServerChecker.Routines
 
 		private RoutineWorker() { }
 
-		public RoutineWorker(RoutineAbstract routine, StatusSetter setter, IPTableModel[] tables, int index)
+		public RoutineWorker(AbstractRoutineTemplate routine, StatusSetter setter, IPTableModel[] tables, int index)
 		{
 			worker = new Thread(ThreadRoutine);
 			timeWaitController = new System.Timers.Timer(TimeWait);

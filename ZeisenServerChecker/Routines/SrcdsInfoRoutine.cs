@@ -1,17 +1,13 @@
-﻿using System;
+﻿using System.Net;
+using System.Net.Sockets;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Threading;
+
 using ZeisenServerChecker.Models;
 using ZeisenServerChecker.Interfaces;
-using System.Net;
-using System.Net.Sockets;
 
 namespace ZeisenServerChecker.Routines
 {
-	class SrcdsInfoRoutine : RoutineAbstract
+	class SrcdsInfoRoutine : AbstractRoutineTemplate
 	{
 		private Socket connectChecker = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
 		private byte[] buffer = new byte[2048];

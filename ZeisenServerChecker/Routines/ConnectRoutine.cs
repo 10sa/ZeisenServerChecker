@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Threading;
+﻿using System.Threading;
 using System.Net.Sockets;
 using System.Net;
 
@@ -12,7 +7,7 @@ using ZeisenServerChecker.Models;
 
 namespace ZeisenServerChecker.Routines
 {
-	class ConnectRoutine : RoutineAbstract
+	class ConnectRoutine : AbstractRoutineTemplate
 	{
 		private Socket httpChecker = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 		private ManualResetEvent connectControl = new ManualResetEvent(true);

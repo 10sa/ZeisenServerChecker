@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Net;
+
 using ZeisenServerChecker.Interfaces;
 using ZeisenServerChecker.Models;
-using ZeisenServerChecker;
-using System.Net;
 
 namespace ZeisenServerChecker.Routines
 {
-	class StatusPageRotuine : RoutineAbstract
+	class StatusPageRotuine : AbstractRoutineTemplate
 	{
 		private WebClient webStringDownloader = new WebClient();
 

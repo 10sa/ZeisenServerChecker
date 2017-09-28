@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ZeisenServerChecker
+﻿namespace ZeisenServerChecker
 {
-	public class StringTable
+	public static class StringTable
 	{
 		public const string StatusChecking = "상태 확인 중...";
 		public const string StatusOnline = "온라인";

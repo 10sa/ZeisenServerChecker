@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using ZeisenServerChecker.Models;
 using ZeisenServerChecker.Routines;
@@ -34,7 +31,7 @@ namespace ZeisenServerChecker.Controllers
 			RegisterWorker(new StatusPageRotuine(), subItemIndex);
 		}
 
-		private void RegisterWorker(RoutineAbstract routine, int index)
+		private void RegisterWorker(AbstractRoutineTemplate routine, int index)
 		{
 			workers.Add(new RoutineWorker(routine, observer, IPTable.ToArray(), index));
 		}
