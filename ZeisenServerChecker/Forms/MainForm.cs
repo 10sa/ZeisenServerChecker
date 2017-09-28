@@ -16,7 +16,7 @@ namespace ZeisenServerChecker
 		private const int MainStatusItemIndex = 2;
 		private const int SubStatusItemIndex = 3;
 
-		private WorkerController workerController;
+		private WorkerController workerController = new WorkerController();
 		private ManualResetEvent notifyWait = new ManualResetEvent(true);
 		private System.Timers.Timer notifyTimer = new System.Timers.Timer();
 		private RegistryKey programRegistry;
@@ -25,10 +25,8 @@ namespace ZeisenServerChecker
 		public MainForm()
 		{
 			InitializeComponent();
-
-			workerController = new WorkerController();
-
 			InitListView();
+
 			this.Visible = false;
 			this.WindowState = FormWindowState.Minimized;
 			this.ShowInTaskbar = false;

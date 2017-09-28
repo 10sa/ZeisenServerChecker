@@ -7,7 +7,7 @@ using ZeisenServerChecker.Interfaces;
 
 namespace ZeisenServerChecker.Routines
 {
-	class SrcdsInfoRoutine : AbstractRoutineTemplate
+	class SrcdsInfoRoutine : RoutineTemplate
 	{
 		private Socket connectChecker = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
 		private byte[] buffer = new byte[2048];

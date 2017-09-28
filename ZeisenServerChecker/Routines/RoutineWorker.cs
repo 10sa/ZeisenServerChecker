@@ -8,7 +8,7 @@ namespace ZeisenServerChecker.Routines
 	class RoutineWorker
 	{
 		private Thread worker;
-		private AbstractRoutineTemplate routine;
+		private RoutineTemplate routine;
 		private ManualResetEvent workerWaitControl = new ManualResetEvent(true);
 		private System.Timers.Timer timeWaitController;
 
@@ -16,7 +16,7 @@ namespace ZeisenServerChecker.Routines
 
 		private RoutineWorker() { }
 
-		public RoutineWorker(AbstractRoutineTemplate routine, StatusSetter setter, IPTableModel[] tables, int index)
+		public RoutineWorker(RoutineTemplate routine, StatusSetter setter, IPTableModel[] tables, int index)
 		{
 			worker = new Thread(ThreadRoutine);
 			timeWaitController = new System.Timers.Timer(TimeWait);

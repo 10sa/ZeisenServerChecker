@@ -1,9 +1,9 @@
 ﻿using ZeisenServerChecker.Models;
 using ZeisenServerChecker.Interfaces;
 
-namespace ZeisenServerChecker.Routines
+namespace ZeisenServerChecker.Interfaces
 {
-	abstract class AbstractRoutineTemplate
+	abstract class RoutineTemplate
 	{
 		public abstract void Work();
 		public abstract void Initialize(IPTableModel[] tables, StatusSetter setter, int index);

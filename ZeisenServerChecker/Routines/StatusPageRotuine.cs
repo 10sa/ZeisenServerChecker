@@ -7,7 +7,7 @@ using ZeisenServerChecker.Models;
 
 namespace ZeisenServerChecker.Routines
 {
-	class StatusPageRotuine : AbstractRoutineTemplate
+	class StatusPageRotuine : RoutineTemplate
 	{
 		private WebClient webStringDownloader = new WebClient();
 
@@ -58,7 +58,6 @@ namespace ZeisenServerChecker.Routines
 						{
 							int statusResult;
 							int.TryParse(value, out statusResult);
-
 
 							if (statusResult == 1)
 								setter.SetCustomValue(table, index, StringTable.StatusOnline);

@@ -7,7 +7,7 @@ using ZeisenServerChecker.Models;
 
 namespace ZeisenServerChecker.Routines
 {
-	class ConnectRoutine : AbstractRoutineTemplate
+	class ConnectRoutine : RoutineTemplate
 	{
 		private Socket httpChecker = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 		private ManualResetEvent connectControl = new ManualResetEvent(true);

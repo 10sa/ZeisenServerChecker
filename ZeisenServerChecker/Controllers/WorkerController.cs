@@ -31,7 +31,7 @@ namespace ZeisenServerChecker.Controllers
 			RegisterWorker(new StatusPageRotuine(), subItemIndex);
 		}
 
-		private void RegisterWorker(AbstractRoutineTemplate routine, int index)
+		private void RegisterWorker(RoutineTemplate routine, int index)
 		{
 			workers.Add(new RoutineWorker(routine, observer, IPTable.ToArray(), index));
 		}
