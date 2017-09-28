@@ -103,7 +103,7 @@
 			this.종료하기ToolStripMenuItem.Name = "종료하기ToolStripMenuItem";
 			this.종료하기ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
 			this.종료하기ToolStripMenuItem.Text = "종료하기";
-			this.종료하기ToolStripMenuItem.Click += new System.EventHandler(this.종료하기ToolStripMenuItem_Click);
+			this.종료하기ToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
 			// 
 			// menuStrip1
 			// 
@@ -141,7 +141,7 @@
 			this.시작프로그램설정ToolStripMenuItem.Name = "시작프로그램설정ToolStripMenuItem";
 			this.시작프로그램설정ToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
 			this.시작프로그램설정ToolStripMenuItem.Text = "시작 프로그램 설정";
-			this.시작프로그램설정ToolStripMenuItem.Click += new System.EventHandler(this.시작프로그램설정ToolStripMenuItem_Click);
+			this.시작프로그램설정ToolStripMenuItem.Click += new System.EventHandler(this.SetStartProgramToolStripMenuItem_Click);
 			// 
 			// MainForm
 			// 

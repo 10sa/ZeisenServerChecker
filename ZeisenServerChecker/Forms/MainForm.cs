@@ -177,7 +177,7 @@ namespace ZeisenServerChecker
 			}
 		}
 
-		private void 종료하기ToolStripMenuItem_Click(object sender, EventArgs e)
+		private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			workerController.Dispose();
 
@@ -272,7 +272,7 @@ namespace ZeisenServerChecker
 			return isExtened;
 		}
 
-		private void 시작프로그램설정ToolStripMenuItem_Click(object sender, EventArgs e)
+		private void SetStartProgramToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			RegistryKey startKey;
 
