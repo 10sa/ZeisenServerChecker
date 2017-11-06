@@ -12,7 +12,7 @@ namespace ZeisenServerChecker.Routines
 		private ManualResetEvent workerWaitControl = new ManualResetEvent(true);
 		private System.Timers.Timer timeWaitController;
 
-		private const int TimeWait = 35000;
+		private const int TimeWait = 40000;
 
 		private RoutineWorker() { }
 
