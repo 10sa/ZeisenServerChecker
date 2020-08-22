@@ -15,11 +15,8 @@ namespace ZeisenServerChecker.Controllers
 
 		public WorkerController()
 		{
-			IPTable.Add(new IPTableModel("Zeisen Project ★ 1 서버", "115.143.203.41", 27025, Enums.CheckType.SocketConnect));
-			IPTable.Add(new IPTableModel("Zeisen Project ★ 2 서버", "115.143.203.41", 27026, Enums.CheckType.SocketConnect));
-			IPTable.Add(new IPTableModel("황혼주점 서버", "115.143.203.41", 27021, Enums.CheckType.SocketConnect));
-			IPTable.Add(new IPTableModel("서버 정보 페이지", "115.143.203.41", 12345, Enums.CheckType.Http));
-			IPTable.Add(new IPTableModel("서버 웹 쉐어", "115.143.203.41", 44444, Enums.CheckType.Http));
+			IPTable.Add(new IPTableModel("Zeisen Project -1", "115.143.203.41", 12345, Enums.CheckType.SocketConnect));
+			IPTable.Add(new IPTableModel("Zeisen Project -1", "115.143.203.41", 11111, Enums.CheckType.SocketConnect));
 		}
 
 		public void Run(int itemIndex, int subItemIndex, StatusSetter observer)
@@ -27,8 +24,6 @@ namespace ZeisenServerChecker.Controllers
 			this.observer = observer;
 
 			RegisterWorker(new SrcdsInfoRoutine(), itemIndex);
-			RegisterWorker(new ConnectRoutine(), itemIndex);
-			RegisterWorker(new StatusPageRotuine(), subItemIndex);
 		}
 
 		private void RegisterWorker(RoutineTemplate routine, int index)
